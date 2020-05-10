@@ -1,0 +1,60 @@
+
+.contentform{
+    margin: 10px;
+  
+}
+#cntfrom{
+    top: 30%;
+	right: 10%;
+	background: aliceblue;
+	border-radius: 6px;
+	height: auto;
+    width: 460px;
+    opacity:0.8;
+}
+.btn-group {
+    width: 100%;
+}
+#rslt{
+    margin-top: 10%;
+}
+
+@media screen and (max-width:1200px){
+    #cntfrom{
+        width: 400px;
+        top: 40%;
+    }
+    #rslt{
+        margin-top: 200px;
+    }
+}
+
+@media screen and (max-width:992px){
+    #rslt{
+        margin-top: 375px;
+    }
+}
+@media screen and (max-width:768px){
+    #cntfrom{
+        width: 400px;
+        top: 50%;
+        right: 5%;
+
+    }
+    #rslt{
+        margin-top: 400px;
+    }
+}
+@media screen and (max-width:600px){
+    #cntfrom{
+        width: 98%;
+        top: 60%;
+        right: 1%;
+        left: 1%;
+        
+
+    }
+    #rslt{
+        margin-top: 530px;
+    }
+}
