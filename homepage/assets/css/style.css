@@ -16,7 +16,7 @@
     width: 100%;
 }
 #rslt{
-    margin-top: 10%;
+    margin-top: 60px;
 }
 
 @media screen and (max-width:1200px){
@@ -25,13 +25,13 @@
         top: 40%;
     }
     #rslt{
-        margin-top: 200px;
+        margin-top: 90px;
     }
 }
 
 @media screen and (max-width:992px){
     #rslt{
-        margin-top: 375px;
+        margin-top: 150px;
     }
 }
 @media screen and (max-width:768px){
@@ -42,7 +42,7 @@
 
     }
     #rslt{
-        margin-top: 400px;
+        margin-top: 230px;
     }
 }
 @media screen and (max-width:600px){
@@ -55,6 +55,6 @@
 
     }
     #rslt{
-        margin-top: 530px;
+        margin-top: 370px;
     }
 }
