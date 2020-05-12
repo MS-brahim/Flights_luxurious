@@ -64,10 +64,11 @@ CREATE TABLE `airport` (
 --
 
 INSERT INTO `airport` (`code`, `city`, `state`, `country`) VALUES
-('Agadir', 'Agadir', 'Morocco', 'Morocco'),
-('Casablanca', 'Marrakesh', 'Morocco', 'Morocco'),
-('Paris', 'Paris', 'France', 'France'),
-('Washington', 'San Fransciso', 'California', 'USA');
+('Agadir International', 'Agadir', 'Morocco', 'Morocco'),
+('Casablanca Airport M-V', 'Casablanca', 'Morocco', 'Morocco'),
+('Paris International Airport ', 'Paris', 'France', 'France'),
+('Wahran International', 'Wahran', 'Algérie', 'Algérie'),
+('Washington International', 'San Fransciso', 'California', 'USA');
 
 -- --------------------------------------------------------
 
@@ -157,6 +158,7 @@ INSERT INTO `flight` (`number`, `airplane_id`, `departure`, `d_time`, `arrival`,
 ('AA6861', '2', 'Washington', '11:00:00', 'Paris', '13:00:00'),
 ('AA6927', '2', 'Paris', '17:00:00', 'Washington', '19:00:00'),
 ('AA986', '1', 'Casablanca', '10:00:00', 'Paris', '14:00:00'),
+('AA986', '1', 'Wahran', '10:00:00', 'Lyon', '14:00:00'),
 ('AIR12', '2', 'Casablanca', '18:35:00', 'Paris', '21:00:00');
 
 -- --------------------------------------------------------
