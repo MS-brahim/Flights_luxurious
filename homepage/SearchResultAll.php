@@ -15,7 +15,7 @@
 	<!-- start navbar  -->
 	<header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><img src="assets/logo.png" width= 120 alt="Flights Luxurious"></a>
+            <a class="navbar-brand" href="index.html"><img src="assets/logo.png" width= 120 alt="Flights Luxurious"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -69,24 +69,24 @@
 				<div class="contentform" id="homepage">
 					<div class="btn-group btn-group-justified" style="width:100%;" >			
 						<div class="btn-group">
-							<button id="button1" type="button" href="#oneway" class="btn btn-primary">One-way</button>
+							<button id="button1" type="button" href="#SearchResult" class="btn btn-primary">Search by city</button>
 						</div>
 						<div class="btn-group">
 							<button id="button2" type="button" href="#all" class="btn btn-primary">Search all flights</button>
 						</div>
 					</div>
 					<hr />
-					<!-- Start search Search Result One way -->
-					<div id="oneway">
-						<form role="form" action="SearchResultOneway.php" method="post">
+					<!-- Start search Search Result  -->
+					<div id="SearchResult">
+						<form role="form" action="SearchResult.php" method="post">
 							<div class="row">
 								<div class="col-sm-6">
 									<label for="from">From:</label>
-									<input type="text" class="form-control" id="from" name="from" placeholder="City or Code" required>
+									<input type="text" class="form-control" id="from" name="from" placeholder="From ..." required>
 								</div>
 								<div class="col-sm-6">
 									<label for="to">To:</label>
-									<input type="text" class="form-control" id="to" name="to" placeholder="City or Code" required>
+									<input type="text" class="form-control" id="to" name="to" placeholder="To ..." required>
 								</div>
 							</div>
 							<hr >
@@ -110,7 +110,7 @@
 							</div>
 						</form>
 					</div>
-					<!-- end search Search Result One way  -->
+					<!-- end search Search Result   -->
 				
 					<!-- end search Search Result All  -->
 					<div id="all">
@@ -139,7 +139,7 @@
     <div class="container" id="rslt">   
         <h1>Search Results</h1>
 
-        <?php
+    <?php
         include_once 'dbconnect2.php';
 
 
@@ -216,7 +216,7 @@
             
             if($availableNumber>0){
             echo '<td>
-                <form action="shoppingcart.php" method="post">
+                <form action="reservation.php" method="post">
                 <input type="hidden" name="flightno" value="'.$row['number'].'">
                 <input type="hidden" name="classtype" value="'.$row['name'].'">
                 <input type="hidden" name="price" value="'.$row['price'].'">
@@ -236,10 +236,9 @@
         }
 
 
-        //mysqli_free_result($result);
 
         mysqli_close($con);
-        ?>  
+    ?>  
     </div>
     <!-- end content   -->
 
