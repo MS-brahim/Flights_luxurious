@@ -170,31 +170,28 @@
             <thead>
             <tr>
                 <th>Flight</th>
-                <th>Aircraft</th>
                 <th width=120px;>Date</th>
                 <th>Departure</th>
                 <th>Departure Time</th>
                 <th>Arrival</th>
                 <th>Arrival Time</th>
                 <th>Class</th>
-                <th>Capacity</th>
                 <th>Price</th>
                 <th>Remain Seats</th>
-                <th>Reservation</th>
+                <th>Tikcet</th>
             </tr>
             </thead>";
         while($row = mysqli_fetch_array($result)) {
             echo "<tbody><tr>";
             echo "<td>" . $row['number'] . "</td>";
-            echo "<td>" . $row['company']." ".$row['type']. "</td>";
             echo "<td>" . $selectdate . "</td>";
             echo "<td>" . $row['departure'] . "</td>";
             echo "<td>" . $row['d_time'] . "</td>";
             echo "<td>" . $row['arrival'] . "</td>";
             echo "<td>" . $row['a_time'] . "</td>";
             echo "<td>" . $row['name'] . "</td>";
-            echo "<td>" . $row['capacity'] . "</td>";
             echo "<td>" . $row['price'] . "</td>";
+
             
         
                 //calculate number of remain seats
@@ -225,7 +222,7 @@
                 <input type="hidden" name="price" value="'.$row['price'].'">
                 <input type="hidden" name="date" value="'.$selectdate.'">
                 <input type="hidden" name="type" value="all">
-                <button type="submit" class="btn btn-success">Add</button>
+                <button type="submit" class="btn btn-success">Add to cart</button>
                 </form>
                 </td>';
             }else{
