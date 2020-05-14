@@ -157,30 +157,32 @@
 
 	
 ?>
-<div class="table-responsive">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Flight</th>
-				<th>Departure</th>
-				<th>Departure Time</th>
-				<th>Arrival</th>
-				<th>Arrival Time</th>
-				<th> Reservation </th>
-			</tr>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Flight</th>
+					<th>Departure</th>
+					<th>Departure Time</th>
+					<th>Arrival</th>
+					<th>Arrival Time</th>
+					<th> Reservation </th>
+				</tr>
 			</thead>
-		<tbody>
-	<?php while ($row = $result->fetch_assoc()) { ?>
-			<tr>
-				<td><?= $row['number'] ;?></td>
-				<td><?= $row['departure'] ;?></td>
-				<td><?= $row['d_time'] ;?></td>
-				<td><?= $row['arrival'] ;?></td>
-				<td><?= $row['a_time'] ;?></td>
-				<td><button class="btn btn-primary ">Show more</button></td>
-			</tr>
-		<?php } ?>
- </div>
+			<tbody>
+			<?php while ($row = $result->fetch_assoc()) { ?>
+				<tr>
+					<td><?= $row['number'] ;?></td>
+					<td><?= $row['departure'] ;?></td>
+					<td><?= $row['d_time'] ;?></td>
+					<td><?= $row['arrival'] ;?></td>
+					<td><?= $row['a_time'] ;?></td>
+					<td><button class="btn btn-primary ">Show more</button></td>
+				</tr>
+			<?php } ?>
+			</tbody>
+		</table>
+ 	</div>
     
 </div>
 
