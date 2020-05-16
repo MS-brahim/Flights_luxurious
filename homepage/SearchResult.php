@@ -16,14 +16,14 @@
 	<!-- start navbar  -->
 	<header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><img src="assets/logo.png" width= 120 alt="Flights Luxurious"></a>
+            <a class="navbar-brand" href="index.html"><img src="assets/logo.png" width= 120 alt="Flights Luxurious"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Réserver</a>
@@ -90,16 +90,6 @@
 									<input type="text" class="form-control" id="to" name="to" placeholder="To ..." required>
 								</div>
 							</div>
-							<hr >
-							<div class="row">
-								<div class="col-sm">
-									<label for="class">Class:</label>
-									<select class="form-control" name="class">
-										<option value="Economy">Economy</option>
-										<option value="Business">Business</option>   
-									</select>
-								</div> 
-							</div> 
 							<br>
 							<div class="btn-group btn-group-justified">	
 									<div class="btn-group">
@@ -138,53 +128,57 @@
 	</div>
 
 
-<div class="container" id="rslt">    
-    
-    <h1>Search Result</h1>
+	<div class="container" id="rslt">    
+		
+		<h1>Search Result</h1>
 
-<?php
-    include_once 'dbconnect2.php';
+	<?php
+		include_once 'dbconnect.php';
 
-    $from = $_POST['from'];
-	$to = $_POST['to'];
+		$from = $_POST['from'];
+		$to = $_POST['to'];
 
-	$sql2= "SELECT * from flight WHERE departure='$from' AND arrival='$to'";
-	/* Crée une requête préparée */
-	$prep_request =$con->prepare($sql2);
-	 /* Exécution de la requête */
-	$prep_request->execute();
-	$result=$prep_request->get_result();
+		$sql2= "SELECT * from vols WHERE departure='$from' AND arrival='$to'";
+		/* Crée une requête préparée */
+		$prep_request =$con->prepare($sql2);
+		/* Exécution de la requête */
+		$prep_request->execute();
+		$result=$prep_request->get_result();
 
-	
-?>
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Flight</th>
-					<th>Departure</th>
-					<th>Departure Time</th>
-					<th>Arrival</th>
-					<th>Arrival Time</th>
-					<th> Reservation </th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php while ($row = $result->fetch_assoc()) { ?>
-				<tr>
-					<td><?= $row['number'] ;?></td>
-					<td><?= $row['departure'] ;?></td>
-					<td><?= $row['d_time'] ;?></td>
-					<td><?= $row['arrival'] ;?></td>
-					<td><?= $row['a_time'] ;?></td>
-					<td><button class="btn btn-primary ">Show more</button></td>
-				</tr>
-			<?php } ?>
-			</tbody>
-		</table>
- 	</div>
-    
-</div>
+		
+	?>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Flight</th>
+						<th>Departure</th>
+						<th>Arrival</th>
+						<th>Departure Time</th>
+						<th>Arrival Time</th>
+						<th>Price</th>
+						<th>Place Rest</th>
+						<th> Reservation </th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php while ($row = $result->fetch_assoc()) { ?>
+					<tr>
+						<td><?= $row['nom_vol'] ;?></td>
+						<td><?= $row['departure'] ;?></td>
+						<td><?= $row['arrival'] ;?></td>
+						<td><?= $row['d_depart'] ;?></td>
+						<td><?= $row['d_arrival'] ;?></td>
+						<td><?= $row['prix'] ;?></td>
+						<td><?= $row['place'] ;?></td>
+						<td><button class="btn btn-primary ">Show more</button></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
 
 
 

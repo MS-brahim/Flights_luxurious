@@ -4,7 +4,7 @@
   
 }
 #cntfrom{
-    top: 30%;
+    top: 65%;
 	right: 10%;
 	background: aliceblue;
 	border-radius: 6px;
@@ -22,7 +22,7 @@
 @media screen and (max-width:1200px){
     #cntfrom{
         width: 400px;
-        top: 40%;
+        top: 50%;
     }
     #rslt{
         margin-top: 90px;
@@ -31,30 +31,29 @@
 
 @media screen and (max-width:992px){
     #rslt{
-        margin-top: 150px;
+        margin-top: 110px;
     }
 }
 @media screen and (max-width:768px){
     #cntfrom{
         width: 400px;
-        top: 50%;
         right: 5%;
 
     }
     #rslt{
-        margin-top: 230px;
+        margin-top: 200x;
     }
 }
 @media screen and (max-width:600px){
     #cntfrom{
         width: 98%;
-        top: 60%;
+        top: 70%;
         right: 1%;
         left: 1%;
         
 
     }
     #rslt{
-        margin-top: 370px;
+        margin-top: 300px;
     }
 }
