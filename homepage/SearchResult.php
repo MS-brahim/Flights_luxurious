@@ -15,23 +15,37 @@
 <body>
 	<!-- start navbar  -->
 	<header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.html"><img src="assets/logo.png" width= 120 alt="Flights Luxurious"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.html"><img src="assets/logo.png" width=100></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Réserver</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Voyage</a>
-                    </li>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Reservation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Voyage</a>
+                </li>
                 </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="" class="btn btn-light">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Log in
+                    </a>
+                    &nbsp;
+                    <div style="width:1px;background:black; height:25px;"></div>
+                    &nbsp;
+                    <a href="" class="btn btn-light">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        Sign in
+                    </a>
+                </form>
             </div>
         </nav>
 	</header>
@@ -171,7 +185,9 @@
 						<td><?= $row['d_arrival'] ;?></td>
 						<td><?= $row['prix'] ;?></td>
 						<td><?= $row['place'] ;?></td>
-						<td><button class="btn btn-primary ">Show more</button></td>
+						<td>
+							<a class="btn btn-primary " href="reservation.php?id_vol=<?= $row['id_vol']; ?>">Show more</i></a>
+						</td>
 					</tr>
 				<?php } ?>
 				</tbody>

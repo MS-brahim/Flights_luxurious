@@ -1,15 +1,17 @@
+<?php include_once 'dbconnect.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Airprice Company</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+    
+    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<script src="https://kit.fontawesome.com/8f45faa16b.js" crossorigin="anonymous"></script>
-
+    
 	
 
 </head>
@@ -50,100 +52,58 @@
             </div>
         </nav>
 	</header>
-	<!-- end navbar  -->
-	
-	<!-- start content  -->
-	<div class="container-fluid">
-		<div class="position-relative">
-			<!-- start carousel slides  -->
-			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
-				<div class="carousel-inner" style="max-height:500px;">
-					<div class="carousel-item active">
-						<img class="d-block w-100" src="assets/airplanee.jpg" alt="First slide">
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="assets/airplane.jpg" alt="Second slide">
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="assets/airplane2.jpg" alt="Third slide">
-					</div>
-				</div>
-				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" style="width:5%;">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next" style="width:5%;" >
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-			<!-- end carusel slides  -->
-
-			<!-- start search from  -->
-			<div class="position-absolute" id="cntfrom">
-
-				<div class="contentform" id="homepage">
-					<div class="btn-group btn-group-justified" style="width:100%;" >			
-						<div class="btn-group">
-							<button id="button1" type="button" href="#SearchResult" class="btn btn-primary" >Search by city</button>
-						</div>
-						<div class="btn-group">
-							<button id="button2" type="button" href="#all" class="btn btn-primary">Search all flights</button>
-						</div>
-					</div>
-					<hr />
-					<!-- Start search Search Result -->
-					<div id="SearchResult">
-						<form role="form" action="SearchResult.php" method="post">
-							<div class="row">
-								<div class="col-sm-6">
-									<label for="from">From:</label>
-									<input type="text" class="form-control" id="from" name="from" placeholder="From ..." required>
-								</div>
-								<div class="col-sm-6">
-									<label for="to">To:</label>
-									<input type="text" class="form-control" id="to" name="to" placeholder="To ..." required>
-								</div>
-							</div>
-							<br>
-							<div class="btn-group btn-group-justified">	
-									<div class="btn-group">
-										<button type="submit" class="btn btn-success">Submit</button>
-									</div>
-									<div class="btn-group">
-										<button type="reset"  class="btn btn-info" value="Reset">Reset</button>
-									</div>
-							</div>
-						</form>
-					</div>
-					<!-- end search Search Result   -->
-				
-					<!-- end search Search Result All  -->
-					<div id="all">
-						<form role="form" action="SearchResultAll.php" method="post">
-							<div class="row"> 
-								<div class="col-sm-6">
-									<label for="selectdate">Select a date:</label>
-									<input type="date" class="form-control" id="selectdate" name="selectdate" required>
-								</div>
-							</div>
-							<br>
-							<div class="row">   
-								<div class="col-sm-6">
-									<button type="submit" class="btn btn-primary">Show ALL</button>
-								</div>
-							</div> 
-						</form>
-					</div>	
-					<!-- end search Search Result All  -->
-				</div>	
-			</div>
-			<!-- end search from  -->
-		</div>
-	</div>
-	<!-- end content   -->
-		
-	<!-- start footer  -->
+    <!-- end navbar  -->
+    <!-- start content reservation -->
+    
+    <?php
+        $id = $_GET['id_vol'];
+        $sql2 = "SELECT * FROM vols WHERE id_vol= " .$_GET['id_vol'];
+        $result = $con->query($sql2);
+        
+        while($row = $result->fetch_assoc()){
+            echo"
+                <div class='container'>
+                    <div class='jumbotron text-center'>
+                        <div class='row'>
+                            <h2 class='col text-primary'>" .$row['departure']. " <img src='assets/depart.png' width=80></h2>
+                            <h3 class='col'>To</h3>
+                            <h2 class='col text-primary'>" .$row['arrival']. " <img src='assets/arrival.png' width=80></h2>
+                        </div>
+                    </div>
+                    <div class='jumbotron'>
+                        <div class='text-center' style='margin-bottom:30px;'>
+                            <a type='button' class='btn btn-danger text-white'>Cancel <i class='fa fa-window-close' aria-hidden='true'></i></a>
+                            <a type='button' class='btn btn-primary' href=''>Reservation <img src='assets/depart.png' width=20></a>
+                        </div>
+                        <div style='margin:0 100px;'>
+                        <div class='row'>
+                            <h5> Flight : </h5><h5 class='text-primary'> &nbsp;" .$row['nom_vol']. "</h5>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                            <h5> Departure : </h5><h5 class='text-primary'> &nbsp;" .$row['d_depart']. "</h5>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                            <h5> Arrival : </h5><h5 class='text-primary'> &nbsp;" .$row['d_arrival']. "</h5>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                            <h5> Price : </h5><h5 class='text-primary'> &nbsp;" .$row['prix']. "</h5>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                            <h5> Place : </h5><h5 class='text-primary'> &nbsp;" .$row['place']. "</h5>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            ";
+        }
+    ?>
+    <!-- end content reservatin  -->
+    
+    <!-- start footer  -->
 	<footer>
 		<div class="container-fluid">
 			<div class="row">
@@ -189,11 +149,7 @@
 		</div>
 	</footer>
 	<!-- end footer  -->
-	
-	
 
-	
-	<script src="assets/js/search.js"> </script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

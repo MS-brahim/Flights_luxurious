@@ -1,8 +1,9 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  16/05/2020 15:30:11                      */
+/* Date de crï¿½ation :  16/05/2020 15:30:11                      */
 /*==============================================================*/
-
+CREATE DATABASE app_vols;
+USE app_vols;
 
 drop table if exists Client;
 
