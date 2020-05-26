@@ -1,8 +1,8 @@
-<?php include_once 'dbconnect.php'; ?>
+<?php include_once '../models/dbconnect.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Airprice Company</title>
+	<title>Price | AirLux</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -18,23 +18,23 @@
 <body>
 	<!-- start navbar  -->
 	<header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.html"><img src="assets/logo.png" width=100></a>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../index.html"><img src="assets/logo.png" width=100></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Reservation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Voyage</a>
-                </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Promotion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Voyage</a>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <a href="" class="btn btn-light">
@@ -53,54 +53,10 @@
         </nav>
 	</header>
     <!-- end navbar  -->
+
     <!-- start content reservation -->
     
-    <?php
-        $id = $_GET['id_vol'];
-        $sql2 = "SELECT * FROM vols WHERE id_vol= " .$_GET['id_vol'];
-        $result = $con->query($sql2);
-        
-        while($row = $result->fetch_assoc()){
-            echo"
-                <div class='container'>
-                    <div class='jumbotron text-center'>
-                        <div class='row'>
-                            <h2 class='col text-primary'>" .$row['departure']. " <img src='assets/depart.png' width=80></h2>
-                            <h3 class='col'>To</h3>
-                            <h2 class='col text-primary'>" .$row['arrival']. " <img src='assets/arrival.png' width=80></h2>
-                        </div>
-                    </div>
-                    <div class='jumbotron'>
-                        <div class='text-center' style='margin-bottom:30px;'>
-                            <a type='button' class='btn btn-danger text-white' href='index.html'>Cancel <i class='fa fa-window-close' aria-hidden='true'></i></a>
-                            <a type='button' class='btn btn-primary text-white' data-toggle='modal' data-target='#modelId' >Reservation <img src='assets/depart.png' width=20></a>
-                        </div>
-                        <div style='margin:0 100px;'>
-                        <div class='row'>
-                            <h5> Flight : </h5><h5 class='text-primary'> &nbsp;" .$row['nom_vol']. "</h5>
-                        </div>
-                        <hr>
-                        <div class='row'>
-                            <h5> Departure : </h5><h5 class='text-primary'> &nbsp;" .$row['d_depart']. "</h5>
-                        </div>
-                        <hr>
-                        <div class='row'>
-                            <h5> Arrival : </h5><h5 class='text-primary'> &nbsp;" .$row['d_arrival']. "</h5>
-                        </div>
-                        <hr>
-                        <div class='row'>
-                            <h5> Price : </h5><h5 class='text-primary'> &nbsp;" .$row['prix']. "</h5>
-                        </div>
-                        <hr>
-                        <div class='row'>
-                            <h5> Place : </h5><h5 class='text-primary'> &nbsp;" .$row['place']. "</h5>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            ";
-        }
-    ?>
+    <?php include_once '../controllers/reservation-controller.php' ?>
 
     <!-- Modal -->
     <div class='modal fade' id='modelId' tabindex='-1' role='dialog' aria-labelledby='modelTitleId' aria-hidden='true'>
@@ -112,48 +68,49 @@
                                     <span aria-hidden='true'>&times;</span>
                                 </button>
                         </div>
-                <form action="" method="post">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <div class='modal-body'>
                         <div class='container-fluid'>
                             <div class='row'>
                                 <div class='col-md-6'>
-                                    <div class='form-group'>
-                                        <span class='form-label'>First name</span>
-                                        <input class='form-control' type='firstname' placeholder='first name' name='First_name'>
+                                    <div class="form-group <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
+                                        <label for="">First name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="nom" value="<?php echo $fname ?>">
+                                        <small class="form-text text-danger"><?php echo $fname_err; ?></small>
                                     </div>
                                 </div>
                                 <div class='col-md-6'>
                                     <div class='form-group'>
-                                        <span class='form-label'>Last name</span>
-                                        <input class='form-control' type='lastname' placeholder='last name' name='Last_name'>
-                                    </div>
-                                </div>
-                                
-                                <div class='col-md-6'>
-                                    <div class='form-group'>
-                                        <span class='form-label'>mail</span>
-                                        <input class='form-control' type='email' placeholder='name' name='mail'>
+                                        <label class='form-label'>Last name</label>
+                                        <input class='form-control' type='lastname' placeholder='enter your firstname' name='Last_name'>
                                     </div>
                                 </div>
                                 
                                 <div class='col-md-6'>
                                     <div class='form-group'>
-                                        <span class='form-label'>Phone</span>
-                                        <input class='form-control' type='tel' placeholder='Phone' name='Phone'>
+                                        <label class='form-label'>email</label>
+                                        <input class='form-control' type='email' placeholder='enter your email' name='email'>
                                     </div>
                                 </div>
                                 
                                 <div class='col-md-6'>
                                     <div class='form-group'>
-                                        <span class='form-label'>passport number</span>
-                                        <input class='form-control' type='text' placeholder='passport number' name='passportnumber'>
+                                        <label class='form-label'>Phone</label>
+                                        <input class='form-control' type='tel' placeholder='your phone number' name='Phone'>
+                                    </div>
+                                </div>
+                                
+                                <div class='col-md-6'>
+                                    <div class='form-group'>
+                                        <label class='form-label'>passport number</label>
+                                        <input class='form-control' type='text' placeholder='your passport number' name='passportnumber'>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class='modal-footer'>
-                        <input type="submit" class="btn btn-primary" name='submit' value='reserve'>
+                        <input type="submit" class="btn btn-primary" value='reserve' >
                     </div>
                 </form>
             </div>
@@ -161,25 +118,35 @@
     </div>
 
     <?php
+        $fname = $lname = $email = $phone = $passport = "";
+        $fname_err = $lname_err = $email_err = $phone_err = $passport_err = "";
 
-
-        if(isset($_POST['submit'])){
-            $First_name = $_POST['First_name'];
-            $Last_name = $_POST['Last_name'];
-            $Phone = $_POST['Phone'];
-            $mail = $_POST['mail'];
-            $passportnumber =  $_POST['passportnumber'];
-
-            //QUERY
-            $query = mysqli_query($con , "INSERT INTO client (nom ,prenom ,phone ,  email, num_passport  ) VALUES('$First_name','$Last_name','$Phone','$mail','$passportnumber')");
-            if($query){
-            $_SESSION['success'] = 'your reservation has been submitted';
-            $_SESSION['id'] = $con->insert_id;
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(empty(trim($_POST["nom"]))){
+                $fname_err = "enter your fisrtname.";
 
             }else{
-                $_SESSION['error'] = 'sorry , check your inputs for error';
-            }
+                $sql = "SELECT id_client FROM Client WHERE nom = ?";
+
+                if($stmt = $con->prepare($sql)){
+                    // Bind variables to the prepared statement as parameters
+                    $stmt->bind_param("s", $param_fname);
+                    
+                    // Set parameters
+                    $param_fname = trim($_POST["nom"]);
+                    
+                    // Attempt to execute the prepared statement
+                    if($stmt->execute()){
+                        // store result
+                        $stmt->store_result();
+                        $fname = trim($_POST["nom"]);
+                    } 
         
+                    // Close statement
+                    $stmt->close();
+                }
+            }
+            $con->close();
         }
     ?>
     <!-- end content reservatin  -->
