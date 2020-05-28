@@ -59,16 +59,12 @@
     <?php include_once '../controllers/reservation-controller.php' ?>
 
     <!-- Modal -->
-    <div class='modal fade' id='modelId' tabindex='-1' role='dialog' aria-labelledby='modelTitleId' aria-hidden='true'>
-        <div class='modal-dialog' role='document'>
+    <!-- <div class='modal fade' id='modelId' tabindex='-1' role='dialog' aria-labelledby='modelTitleId' aria-hidden='true'> -->
+        <div class='container' id="infoForm" role='document'>
             <div class='modal-content'>
                     <div class='modal-header'>
-                            <h5 class='modal-title'>Enter your information</h5>
-                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                <span aria-hidden='true'>&times;</span>
-                            </button>
+                        <h5 class='modal-title'>Enter your information</h5>
                     </div>
-                    
                 <form action="" method="post">
                     <div class='modal-body'>
                     <?php
@@ -149,7 +145,7 @@
                         </div>
                     </div>
                     <div class='modal-footer'>
-                        <input type="submit" name="submit" class="btn btn-primary" value='reserveer' >
+                        <input type="submit" name="submit" class="btn btn-primary" value='reserver' >
                     </div>
                 </form>
             </div>
@@ -208,9 +204,7 @@
 
     <script>
         $('#exampleModal').on('show.bs.modal', event => {
-            var button = $(event.relatedTarget);
-            var modal = $(this);
-            // Use above variables to manipulate the DOM
+            
             
         });
     </script>
