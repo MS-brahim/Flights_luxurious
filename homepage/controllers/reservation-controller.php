@@ -1,4 +1,5 @@
 <?php
+
         $id = $_GET['id_vol'];
         $sql2 = "SELECT * FROM vols WHERE id_vol= " .$_GET['id_vol'];
         $result = $con->query($sql2);

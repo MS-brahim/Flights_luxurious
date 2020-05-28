@@ -63,92 +63,99 @@
         <div class='modal-dialog' role='document'>
             <div class='modal-content'>
                     <div class='modal-header'>
-                            <h5 class='modal-title'>Modal title</h5>
-                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                    <span aria-hidden='true'>&times;</span>
-                                </button>
-                        </div>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <h5 class='modal-title'>Enter your information</h5>
+                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                    </div>
+                    
+                <form action="" method="post">
                     <div class='modal-body'>
+                    <?php
+                    if(isset($_POST['submit'])){
+                        $fname = htmlspecialchars(trim($_POST['fname'])); 
+                        $lname = htmlspecialchars(trim($_POST['lname']));
+                        $email = htmlspecialchars(trim($_POST['email']));
+                        $phone = htmlspecialchars(trim($_POST['phone']));
+                        $passport = htmlspecialchars(trim($_POST['num_passport']));
+                        $errors = array();
+
+                        if(strlen($fname)== 0){
+                            $errors[] = "enter your firstname.";
+                        }
+                        if(strlen($lname)==0){
+                            $errors[] = "enter your lasname.";
+                        }
+                        if(empty($email)){
+                            $errors[] = "enter your email.";
+                        }
+                        if(strlen($phone)<= 8){
+                            $errors[] = "enter your phone number.";
+                        }
+                        if(strlen($passport)<= 1){
+                            $errors[] = "enter your passport.";
+                        }
+                    
+                        if(count($errors) == 0){
+
+                            $sql = "INSERT INTO client (nom, prenom, email, phone, num_passport) VALUE ('$fname', '$lname','$email' ,'$phone', '$passport')";
+                            if(mysqli_query($con, $sql)){
+                                echo "<p class='text-success'>The Request Was Successful.</p>";
+                                
+                            } 
+                        }else{
+                            echo "<p class='text-danger'> Please Complete Your Information *.</p>";
+                        }
+                        
+                    }
+                    ?>
                         <div class='container-fluid'>
                             <div class='row'>
                                 <div class='col-md-6'>
-                                    <div class="form-group <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
+                                    <div class="form-group">
                                         <label for="">First name <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="nom" value="<?php echo $fname ?>">
-                                        <small class="form-text text-danger"><?php echo $fname_err; ?></small>
+                                        <input class="form-control" type="text" name="fname" placeholder='enter your firstname'>
+                                        <small class="form-text text-danger"></small>
                                     </div>
                                 </div>
                                 <div class='col-md-6'>
                                     <div class='form-group'>
-                                        <label class='form-label'>Last name</label>
-                                        <input class='form-control' type='lastname' placeholder='enter your firstname' name='Last_name'>
+                                        <label class='form-label'>Last name <span class="text-danger">*</span></label>
+                                        <input class='form-control' type='lastname' placeholder='enter your lastname' name='lname'>
                                     </div>
                                 </div>
                                 
                                 <div class='col-md-6'>
                                     <div class='form-group'>
-                                        <label class='form-label'>email</label>
+                                        <label class='form-label'>email <span class="text-danger">*</span></label>
                                         <input class='form-control' type='email' placeholder='enter your email' name='email'>
                                     </div>
                                 </div>
                                 
                                 <div class='col-md-6'>
                                     <div class='form-group'>
-                                        <label class='form-label'>Phone</label>
-                                        <input class='form-control' type='tel' placeholder='your phone number' name='Phone'>
+                                        <label class='form-label'>Phone <span class="text-danger">*</span></label>
+                                        <input class='form-control' type='tel' placeholder='your phone number' name='phone'>
                                     </div>
                                 </div>
                                 
                                 <div class='col-md-6'>
                                     <div class='form-group'>
-                                        <label class='form-label'>passport number</label>
-                                        <input class='form-control' type='text' placeholder='your passport number' name='passportnumber'>
+                                        <label class='form-label'>passport number <span class="text-danger">*</span></label>
+                                        <input class='form-control' type='text' placeholder='your passport number' name='num_passport'>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class='modal-footer'>
-                        <input type="submit" class="btn btn-primary" value='reserve' >
+                        <input type="submit" name="submit" class="btn btn-primary" value='reserveer' >
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <?php
-        $fname = $lname = $email = $phone = $passport = "";
-        $fname_err = $lname_err = $email_err = $phone_err = $passport_err = "";
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if(empty(trim($_POST["nom"]))){
-                $fname_err = "enter your fisrtname.";
-
-            }else{
-                $sql = "SELECT id_client FROM Client WHERE nom = ?";
-
-                if($stmt = $con->prepare($sql)){
-                    // Bind variables to the prepared statement as parameters
-                    $stmt->bind_param("s", $param_fname);
-                    
-                    // Set parameters
-                    $param_fname = trim($_POST["nom"]);
-                    
-                    // Attempt to execute the prepared statement
-                    if($stmt->execute()){
-                        // store result
-                        $stmt->store_result();
-                        $fname = trim($_POST["nom"]);
-                    } 
-        
-                    // Close statement
-                    $stmt->close();
-                }
-            }
-            $con->close();
-        }
-    ?>
     <!-- end content reservatin  -->
     
     <!-- start footer  -->
@@ -198,7 +205,7 @@
 	</footer>
 	<!-- end footer  -->
 
-<!-- 
+
     <script>
         $('#exampleModal').on('show.bs.modal', event => {
             var button = $(event.relatedTarget);
@@ -206,7 +213,7 @@
             // Use above variables to manipulate the DOM
             
         });
-    </script> -->
+    </script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
